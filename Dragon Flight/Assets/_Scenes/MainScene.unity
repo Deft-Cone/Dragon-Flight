@@ -427,7 +427,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   upForce: 10
-  downForce: 0.4
+  downForce: 0.3
 --- !u!1 &2097527725
 GameObject:
   m_ObjectHideFlags: 0
