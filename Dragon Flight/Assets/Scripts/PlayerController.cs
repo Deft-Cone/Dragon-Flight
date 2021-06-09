@@ -25,8 +25,7 @@ public class PlayerController : MonoBehaviour
                 body.velocity *= downForce;
             }
         }
-    }
-
+    
     void OnTriggerEnter2D(Collider2D other)
     {
         if(other.gameObject.CompareTag("Coin"))
@@ -34,3 +33,4 @@ public class PlayerController : MonoBehaviour
             Destroy(other.gameObject);
         }
     }
+}
