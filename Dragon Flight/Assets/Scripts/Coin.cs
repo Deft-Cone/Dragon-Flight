@@ -4,13 +4,19 @@ using UnityEngine;
 
 public class Coin : MonoBehaviour
 {
-    public int coinValue = 1;
+    public ScoreManager SM;
+    public AudioClip coinSound;
+
+    // Update is called once per frame
+    void Start()
+    {
+        SM = GameObject.Find("Game Manager").GetComponent<ScoreManager>();
+    }
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.CompareTag("Player"))
-        {
-            ScoreManager.instance.ChangeScore(coinValue);
-        }
+        SM.addCoin();
+        AudioSource.PlayClipAtPoint(coinSound, transform.position);
+        Destroy(gameObject);
     }
 }
