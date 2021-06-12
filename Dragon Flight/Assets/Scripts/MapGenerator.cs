@@ -25,5 +25,21 @@ public class MapGenerator : MonoBehaviour
             tempGround.transform.position += new Vector3(39, 0, 0);
             ground = tempGround;
         }
+
+        bool coinSpawned = false;
+        while (!coinSpawned)
+        {
+            Vector3 coinPosition = new Vector3(Random.Range(20f, 30f), Random.Range(-2f, 5.5f), 0f);
+            if ((coinPosition - transform.position).magnitude < 3)
+            {
+                continue;
+            }
+            else
+            {
+                nextCoin = Instantiate(coin, coinPosition, Quaternion.identity);
+                nextCoin.name = "Coin";
+                coinSpawned = true;
+            }
+        }
     }
 }

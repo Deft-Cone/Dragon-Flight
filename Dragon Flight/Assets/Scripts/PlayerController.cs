@@ -8,10 +8,15 @@ public class PlayerController : MonoBehaviour
     public float upForce;
     public float downForce;
 
+    public ScoreManager SM;
+    public GameObject coin;
+    public AudioClip coinSound;
+
     // Start is called before the first frame update
     void Start()
     {
         body = GetComponent<Rigidbody2D>();
+        SM = GameObject.Find("Game Manager").GetComponent<ScoreManager>();
     }
 
     // Update is called once per frame
@@ -21,16 +26,9 @@ public class PlayerController : MonoBehaviour
         {
             body.AddForce(new Vector3(0, upForce, 0), ForceMode2D.Force);
         }
-        else if (Input.GetMouseButtonUp(0)) {
-                body.velocity *= downForce;
-            }
-        }
-    
-    void OnTriggerEnter2D(Collider2D other)
-    {
-        if(other.gameObject.CompareTag("Coin"))
+        else if (Input.GetMouseButtonUp(0)) 
         {
-            Destroy(other.gameObject);
+            body.velocity *= downForce;
         }
     }
 }
