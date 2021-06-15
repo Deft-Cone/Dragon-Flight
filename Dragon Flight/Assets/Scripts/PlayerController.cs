@@ -9,14 +9,11 @@ public class PlayerController : MonoBehaviour
     public float downForce;
 
     public ScoreManager SM;
-    public GameObject coin;
-    public AudioClip coinSound;
 
     // Start is called before the first frame update
     void Start()
     {
         body = GetComponent<Rigidbody2D>();
-        SM = GameObject.Find("Game Manager").GetComponent<ScoreManager>();
     }
 
     // Update is called once per frame

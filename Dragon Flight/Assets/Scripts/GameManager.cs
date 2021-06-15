@@ -2,17 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MapGenerator : MonoBehaviour
+public class GameManager : MonoBehaviour
 {
     public GameObject prevGround;
     public GameObject ground;
-
     public GameObject player;
+
+    private ScoreManager theScoreManager;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        theScoreManager = FindObjectOfType<ScoreManager>();
     }
 
     // Update is called once per frame
@@ -25,21 +26,18 @@ public class MapGenerator : MonoBehaviour
             tempGround.transform.position += new Vector3(39, 0, 0);
             ground = tempGround;
         }
-
-        bool coinSpawned = false;
-        while (!coinSpawned)
-        {
-            Vector3 coinPosition = new Vector3(Random.Range(20f, 30f), Random.Range(-2f, 5.5f), 0f);
-            if ((coinPosition - transform.position).magnitude < 3)
-            {
-                continue;
-            }
-            else
-            {
-                nextCoin = Instantiate(coin, coinPosition, Quaternion.identity);
-                nextCoin.name = "Coin";
-                coinSpawned = true;
-            }
-        }
     }
+
+    // public void RestartGame()
+    // {
+    //     StartCoroutine("RestartGameCo");
+    // }
+
+    // public IEnumerator RestartGameCo()
+    // {
+    //     theScoreManager.scoreIncreasing = false;
+
+    //     theScoreManager.scoreCount = 0;
+    //     theScoreManager.scoreIncreasing = true;
+    // }
 }
