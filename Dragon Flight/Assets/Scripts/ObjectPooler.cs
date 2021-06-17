@@ -4,29 +4,65 @@ using UnityEngine;
 
 public class ObjectPooler : MonoBehaviour
 {
-    public GameObject pooledObject;
+    [System.Serializable]
+    public class Pool
+    {
+        public string tag;
+        public GameObject prefab;
+        public int size;
+    }
 
-    public int pooledAmount;
+    #region Singleton
 
-    List<GameObject> pooledObjects;
+    public static ObjectPooler Instance;
+    
+    private void Awake()
+    {
+        Instance = this;
+    }
+
+    #endregion
+
+    public List<Pool> pools;
+    public Dictionary<string, Queue<GameObject>> poolDictionary;
 
     // Start is called before the first frame update
     void Start()
     {
-        pooledObjects = new List<GameObject>();
+        poolDictionary = new Dictionary<string, Queue<GameObject>>();
 
-        for (int i = 0; i < pooledAmount; i++) // Create new int "i", when I < pooled amount run, After running add 1 to "i"
+        foreach (Pool pool in pools)
         {
-            GameObject obj = (GameObject)Instantiate(pooledObject); // Uses casting
-            obj.SetActive(false);
-            pooledObjects.Add(obj); // Adding object to pooled Object List
+            Queue<GameObject> objectPool = new Queue<GameObject>();
+            
+            for (int i = 0; i < pool.size; i++)
+            {
+                GameObject obj = Instantiate(pool.prefab);
+                obj.SetActive(false);
+                objectPool.Enqueue(obj);
+            }
+
+            poolDictionary.Add(pool.tag, objectPool);
         }
-        
     }
 
-    // Update is called once per frame
-    void Update()
+    public GameObject SpawnFromPool (string tag, Vector2 position)
     {
-        
+        if (!poolDictionary.ContainsKey(tag))
+        {
+            Debug.LogWarning("Pool with Tag " + tag + " doesn't exists.");
+            return null;
+        }
+        GameObject objectToSpawn = poolDictionary[tag].Dequeue();
+
+        objectToSpawn.SetActive(true);
+        objectToSpawn.transform.position = position;
+
+        poolDictionary[tag].Enqueue(objectToSpawn);
+
+        return objectToSpawn;
     }
+
+    
+
 }
