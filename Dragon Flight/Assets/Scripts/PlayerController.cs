@@ -7,6 +7,7 @@ public class PlayerController : MonoBehaviour
     Rigidbody2D body;
     public float upForce;
     public float downForce;
+    public float maxFall;
 
     public ScoreManager SM;
 
@@ -23,9 +24,14 @@ public class PlayerController : MonoBehaviour
         {
             body.AddForce(new Vector3(0, upForce, 0), ForceMode2D.Force);
         }
-        else if (Input.GetMouseButtonUp(0)) 
-        {
-            body.velocity *= downForce;
-        }
+        // else if (Input.GetMouseButtonUp(0)) 
+        // {
+        //     body.velocity *= downForce;
+        // }
+    }
+
+    void FixedUpdate()
+    {
+        body.drag = maxFall;
     }
 }
