@@ -21,12 +21,22 @@ public class ObjectPooler : MonoBehaviour
             obj.SetActive(false);
             pooledObjects.Add(obj); // Adding object to pooled Object List
         }
-        
     }
 
-    // Update is called once per frame
-    void Update()
+    public GameObject GetPooledObject() 
     {
-        
+        for(int i = 0; i < pooledObjects.Count; i++)
+        {
+            if(!pooledObjects[i].activeInHierarchy) // go to position 0 in list
+            {
+                return pooledObjects[i];
+            }
+        }
+
+        GameObject obj = (GameObject)Instantiate(pooledObject); // Uses casting
+        obj.SetActive(false);
+        pooledObjects.Add(obj); // Adding object to pooled Object List
+
+        return obj;
     }
 }
