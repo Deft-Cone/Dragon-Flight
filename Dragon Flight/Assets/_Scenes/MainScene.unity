@@ -284,6 +284,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 581707722}
+  - component: {fileID: 581707723}
   m_Layer: 0
   m_Name: CoinGenerator
   m_TagString: Untagged
@@ -298,7 +299,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 581707721}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -306,6 +307,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &581707723
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 581707721}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6105a04c053328f4bb5012855c772cc3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  coinPool: {fileID: 1438139307}
+  distanceBetweenCoins: 10
 --- !u!1 &628263014
 GameObject:
   m_ObjectHideFlags: 0
@@ -5429,8 +5444,13 @@ MonoBehaviour:
   thePlatform: {fileID: 6813872583904589185, guid: 98c4b849509ed9b4596e8be2ed9203a7,
     type: 3}
   generationPoint: {fileID: 31390924}
+  coinPoint: {fileID: 1822522028}
+  coinSpawnPoint: 0
   distanceBetween: 6.9
   theObjectPool: {fileID: 905201922}
+  randomCoinThreshold: 50
+  center: {x: 0, y: 0, z: 0}
+  size: {x: 5, y: 10, z: 0}
 --- !u!4 &1023404348
 Transform:
   m_ObjectHideFlags: 0
@@ -5490,7 +5510,37 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pooledObject: {fileID: 7990880252876159033, guid: 81c6e15278fda6649b47091ae788d5cc,
     type: 3}
-  pooledAmount: 15
+  pooledAmount: 2
+--- !u!1 &1822522027
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1822522028}
+  m_Layer: 0
+  m_Name: CoinSpawnPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1822522028
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1822522027}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 15, y: -5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2097527728}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1838386607 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3535411174042448764, guid: c7dd9bb5d5a2647409a621d8a29eb879,
@@ -5774,6 +5824,7 @@ Transform:
   - {fileID: 2127986743}
   - {fileID: 31390924}
   - {fileID: 2024352554}
+  - {fileID: 1822522028}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

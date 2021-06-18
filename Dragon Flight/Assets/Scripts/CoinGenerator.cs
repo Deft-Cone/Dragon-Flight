@@ -8,10 +8,10 @@ public class CoinGenerator : MonoBehaviour
 
     public float distanceBetweenCoins;
 
-    public void SpawnCoins (Vector3 startPosition);
+    public void SpawnCoins (Vector3 startPosition)
     {
         GameObject coin1 = coinPool.GetPooledObject();
         coin1.transform.position = startPosition;
-        cpin1.SetActive(true);
+        coin1.SetActive(true);
     }
 }

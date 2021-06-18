@@ -6,6 +6,8 @@ public class PlatformGenerator : MonoBehaviour
 {
     public GameObject thePlatform;
     public Transform generationPoint;
+    public Transform coinPoint;
+    public float coinSpawnPoint;
 
     public float distanceBetween;
 
@@ -13,11 +15,19 @@ public class PlatformGenerator : MonoBehaviour
 
     public ObjectPooler theObjectPool;
 
+    private CoinGenerator theCoinGenerator;
+    public float randomCoinThreshold;
+    private Vector3 randomPos;
+    public Vector3 center;
+    public Vector3 size;
     
+
     // Start is called before the first frame update
     void Start()
     {
         platformWidth = thePlatform.GetComponent<BoxCollider2D>().size.x;
+        theCoinGenerator = FindObjectOfType<CoinGenerator>();
+        coinSpawnPoint = coinPoint.position.x;
     }
 
     // Update is called once per frame
@@ -25,6 +35,8 @@ public class PlatformGenerator : MonoBehaviour
     {
         if (transform.position.x < generationPoint.position.x)
         {
+            
+
             transform.position = new Vector3(transform.position.x + platformWidth + distanceBetween, transform.position.y, transform.position.z);
 
             // Instantiate(thePlatform, transform.position, transform.rotation);
@@ -34,6 +46,13 @@ public class PlatformGenerator : MonoBehaviour
             newPlatform.transform.position = transform.position;
             newPlatform.transform.rotation = transform.rotation;
             newPlatform.SetActive(true);
+
+            if (Random.Range(0f, 100f) < randomCoinThreshold)
+            {
+               randomPos = new Vector3(transform.position.x, Random.Range(-size.y / 2, size.y / 2), 0);
+               theCoinGenerator.SpawnCoins(randomPos); 
+            }
+            
         }
     }
 }
